@@ -1,0 +1,351 @@
+/* The ::before and ::after pseudo-elements allow you to add content before or after an element’s main content without adding extra HTML tags. They’re often used for decorative purposes  */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+/*Without box-sizing: border-box, it’s easy to lose track of exact element sizes, especially when adding padding and borders. 
+Using box-sizing: border-box makes it easier to control layouts since elements keep the width you set, regardless of padding and borders. 
+for ex: agar apki width 200px h and ap extra padding and margin lga rahe ho,toh box sizing makes sure padding and margin uss 200 me fix hojaye, naki width increase kre  */
+:root{
+ --fw-reg: 300;
+    --fw-bold: 900;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family:sans-serif;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.709);
+    font-weight: 900;
+    accent-color: rgba(0, 255, 183, 0.523);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+/* This variable sets an accent color in a teal shade (#16e0bd), which you might use for elements that you want to highlight, like buttons, links, or headings. */
+h1 {
+    font-family: monospace;
+    font-size: 4.5rem;
+}
+/* 3rem = 48px  so 1rem=16px*/
+h2{
+    font-size: 4.75rem;
+}
+h3{
+    font-size: 1.5rem;
+}
+body{
+    font-size: 1.125rem;
+}
+p {
+    font-weight: 300; 
+}
+@media (min-width: 800px) {
+    :root {
+        --fs-h1: 4.5rem;
+        --fs-h2: 3.75rem;
+        --fs-h3: 1.5rem;
+        --fs-body: 1.125rem;
+    }
+}
+/* :root selector, which applies them globally across the whole document
+and this are custom  properties --fs-body */
+img{
+    display: block;
+    max-width: 100%;
+/* max-width: 100% in CSS ensures that an element does not exceed the width of its container, making it responsive and adaptable to different screen sizes */
+}
+h1,
+h2,
+h3 {
+    line-height: 1.1;
+    margin: 0;
+}
+/* line-height: 1.1 makes each heading more compact by reducing the space between lines if the heading text wraps onto multiple lines. */
+section{
+    padding: 5rem 2rem;
+}
+/*  so that on small screen, it wont touch border */
+
+.section-title{
+    margin-bottom: .25rem;
+    font-weight: var(--fw-reg);
+}
+strong{ 
+    display: block;
+    font-weight: var(--fw-bold);
+}
+.section-subtitle,.section__subtitle-about{
+    margin: 0;
+    padding: .25em 1em;
+    font-size:var(--fs-h3) ;
+    background: rgba(0, 255, 183, 0.523) ;
+    margin-bottom: 1em;
+}
+.section-subtitle{
+    display: inline-block;
+}
+@media(min-width: 700px){
+    .intro {
+        display: grid;
+        width: min-content;
+        margin: 0 auto;
+        grid-column-gap: 1em;
+        grid-template-areas: 
+            "img title"
+            "img subtitle";
+        grid-template-columns: min-content max-content;
+    }
+    .intro-img {
+        grid-area: img;
+        min-width: 250px;
+        position: relative;
+        z-index: 2;
+    }   
+    .section-subtitle{
+        align-self: start;
+        grid-column: -1 / 1;
+        grid-row: 2;
+        text-align: right;
+        position: relative;
+        left : -1rem;
+        width:calc(100% + 1.5em);
+    }
+}
+.intro-img{
+    box-shadow: 0.25em 0.25em 0.75em rgba(0,0,0,.25);
+}
+.intro{
+    display: relative;
+}
+.service{
+    background-color: rgba(0, 0, 0, 0.071);
+    background-size: cover;
+    background-image: url(picture.jpg);
+    /* background-blend-mode: multiply; */
+    color: white;
+    text-align: center;
+}
+.service-section-title{
+    display: relative;
+    color:rgba(0, 255, 183, 0.61) ;
+    font-weight: bolder;
+}
+.service-section-title::after {
+    content: '';
+    display: block;
+    width: 5em;
+    height: 1px;
+    margin: 0.5em auto 1em;
+    background: white;
+    opacity: 0.5;
+}
+.services {
+    max-width: 500px;
+    margin: 0 auto;
+}
+@media (min-width: 800px) {
+    .services {
+        display: flex;
+        max-width: 1000px;
+        margin: 0 auto;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+.servicess + .servicess{
+    margin-left: 2em;
+}
+.btn {
+    display: inline-block;
+    padding: .5em 2.5em;
+    background: rgba(0, 255, 183, 0.523) ;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 900;
+    transition: transfrom 200ms ease-in-out;
+    margin-top: 2.5em;
+}
+.btn:hover{
+     transform: scale(1.1);
+     border: 5px solid black;
+}
+.about-me {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-bottom: 0;
+}
+.section__title{
+    font-weight: bolder;
+}
+@media (min-width: 600px) {
+    .about-me {
+        display: grid;
+        grid-template-columns: 1fr 200px;
+        grid-template-areas: 
+        "title img"
+        "subtitle img"
+        "text img";
+        grid-column-gap: 2rem;
+    }
+.section__title{
+    grid-area: title;
+}
+.section__subtitle-about{
+    grid-column: 1 / -1;
+    grid-row: 2;
+    position: relative;
+    left: -2em;
+    width: calc(100% + 4em);
+    padding-left: 2em;
+    padding-right: calc(200px + 2em);
+}
+.about-img{
+    grid-area: img;
+    position: relative;
+    z-index: 2;
+}
+}
+.footer{
+    background-color: black;
+    color: rgba(0, 255, 183, 0.523) ;
+    text-align: center;
+    padding: 2.5em 0;
+    
+}
+.footer a {
+    color: inherit;
+    text-decoration: none;
+}
+.social-list-link:hover , .footer__link:hover{
+       opacity: 0.5;
+}
+.footer__link:hover{
+    text-decoration: underline;
+}
+.footer__link{
+    font-size: large;
+    font-weight: bolder;
+} 
+.social-list{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 2em 0;
+    padding: 0;
+}
+.social-list___title{
+    margin: 0 1.5em;
+    font-weight: bolder;
+    font-size: larger;
+}
+.social-list-link{
+    padding-right: .5em;
+}
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+}
+
+.logo {
+    max-width: 100px;
+}
+
+.nav {
+    position: fixed;
+    background: black;
+    color: white;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    
+    transform: translateX(100%);
+    transition: transform 250ms cubic-bezier(.5, 0, .5, 1);
+}
+.nav__list {
+    list-style: none;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav__link {
+    color: inherit;
+    font-weight: bolder;
+    font-size: larger;
+    text-decoration: none;
+}
+.nav__link:hover{
+    color:rgba(0, 255, 183, 0.523);
+    text-decoration: underline;
+}
+.toggle{
+    padding: .25em;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    z-index: 1000;
+
+}
+.hamburger {
+    display: block;
+    position: relative;
+}
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+    background:rgba(0, 255, 183, 0.523);;
+    width: 2em;
+    height: 3px;
+    border-radius: 1em;
+    transition: transform 250ms ease-in-out;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+.hamburger::before { top: 6px; }
+.hamburger::after { bottom: 6px; }
+/* The .hamburger itself is the middle line.
+::before creates the top line.
+::after creates the bottom line. */
+
+.nav-open .nav {
+    transform: translateX(0);
+}
+.nav-open .toggle {
+    position: fixed;
+}
+
+.nav-open .hamburger {
+    transform: rotate(.625turn);
+}
+
+.nav-open .hamburger::before {
+    transform: rotate(90deg) translateX(-6px);
+}
+
+.nav-open .hamburger::after {
+    opacity: 0;
+}
